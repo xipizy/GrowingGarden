@@ -3,7 +3,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
 
     // Sreen Settings
     final int originalTitleSize = 16; // 32x32 tile
@@ -15,9 +15,25 @@ public class GamePanel extends JPanel {
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
+    Thread gameThread;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+    }
+
+    public void startGameThread() {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run() {
+        // Game Loop
+
+        while(gameThread != null) {
+            System.out.println("Game is running;");
+        }
     }
 }
